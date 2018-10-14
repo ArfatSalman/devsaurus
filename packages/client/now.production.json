@@ -11,5 +11,6 @@
     ],
     "directoryListing": false,
     "trailingSlash": true
-  }
+  },
+  "public": true
 }

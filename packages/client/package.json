@@ -9,7 +9,7 @@
     "webpack:watch": "webpack -w",
     "webpack:production": "NODE_ENV=production webpack",
     "build:production": "rimraf build/* && yarn build && yarn webpack:production && cp -av public/* build",
-    "deploy:production": "yarn build:production && now --local-config=now.production.json"
+    "deploy:production": "yarn build:production && now --public --local-config=now.production.json"
   },
   "keywords": [
     "BuckleScript"
