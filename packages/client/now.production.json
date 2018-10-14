@@ -1,0 +1,15 @@
+{
+  "type": "static",
+  "engines": {
+    "node": "^9.10.0"
+  },
+  "files": ["build"],
+  "static": {
+    "public": "build",
+    "rewrites": [
+      { "source": "app/**", "destination": "/index.html" }
+    ],
+    "directoryListing": false,
+    "trailingSlash": true
+  }
+}

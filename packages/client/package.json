@@ -5,10 +5,11 @@
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack -w",
+    "test": "jest",
+    "webpack:watch": "webpack -w",
     "webpack:production": "NODE_ENV=production webpack",
-    "build:production": "rimraf build/* && yarn build && yarn webpack:production && cp -av public/* build"
+    "build:production": "rimraf build/* && yarn build && yarn webpack:production && cp -av public/* build",
+    "deploy:production": "yarn build:production && now --local-config=now.production.json"
   },
   "keywords": [
     "BuckleScript"

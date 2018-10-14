@@ -1,0 +1,50 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:9.10.0
+    working_directory: ~/devsaurus
+    steps:
+      - checkout # Checkout the code over SSH from git to working_directory
+      - run: yarn install
+      - run: yarn add now -W
+      - run: yarn build
+      - persist_to_workspace:
+          root: .
+          paths: .
+  
+  test:
+    docker:
+      - image: circleci/node:9.10.0
+    steps:
+      - checkout
+      - run: yarn install
+      - run: yarn test
+  
+  deploy_client_production:
+    docker:
+      - image: circleci/node:9.10.0
+    working_directory: ~/devsaurus/packages/client
+    steps:
+      - attach_workspace:
+          at: ~/devsaurus
+      - run: yarn deploy:production -t $NOW_TOKEN
+
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+
+      - test:
+          requires:
+            - build
+
+      - deploy_client_production:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
